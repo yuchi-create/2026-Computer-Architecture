@@ -3,15 +3,15 @@
     rotl rd, rs1, rs2   ->   rd = rs1 循環左移 (rs2 & 31) 位
     格式:R-type,custom-0(opcode 0001011 = 0x0B)
 
-funct3 / funct7 從 src/include/rotl_isa.h 讀取,與 C 和組合語言共用同一份設定。
+funct3 / funct7 從 spec/rotl_isa.h 讀取,與 C 和組合語言共用同一份設定。
 """
 
 import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-HEADER = ROOT / "src" / "include" / "rotl_isa.h"
-VECTORS_CSV = ROOT / "src" / "tests" / "rotl_vectors.csv"
+HEADER = ROOT / "spec" / "rotl_isa.h"
+VECTORS_CSV = ROOT / "tests" / "rotl_vectors.csv"
 
 MASK32 = 0xFFFF_FFFF
 
