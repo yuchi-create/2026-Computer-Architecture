@@ -98,4 +98,4 @@
 
 `tools/rotl_isa.py` 也從這個檔案讀取 funct3 / funct7。教師分配編碼後,只需改這裡的兩行。
 
-參考資料見 [`../references/README.md`](../references/README.md)。
+參考資料見 [`references/README.md`](../references/README.md)。
