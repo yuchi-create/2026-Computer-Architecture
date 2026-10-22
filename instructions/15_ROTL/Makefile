@@ -7,7 +7,7 @@ RV_FLAGS = -march=rv32im -mabi=ilp32 -ffreestanding -Ispec
 BUILD   = build
 VECTORS = tests/rotl_vectors.csv
 
-.PHONY: all test test-c test-ubsan test-py ub-demo asm counts clean
+.PHONY: all test test-c test-ubsan test-py ub-demo asm counts encode clean
 
 all: test
 
@@ -48,6 +48,10 @@ counts:
 
 $(BUILD):
 	mkdir -p $(BUILD)
+
+# CP3:印出編碼範例(暫定的 funct3 / funct7 由 spec/rotl_isa.h 讀取)
+encode:
+	$(PYTHON) tools/rotl_isa.py
 
 clean:
 	rm -rf $(BUILD) tools/__pycache__
