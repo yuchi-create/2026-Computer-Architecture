@@ -15,4 +15,4 @@ make test       # test_rotl + UBSan
 make ub-demo    # 反例(n = 0 時預期報錯)
 ```
 
-設計與測試結果見 [`../report/CP1.md`](../report/CP1.md)。
+設計與測試結果見 [`report/CP1.md`](../report/CP1.md)。
