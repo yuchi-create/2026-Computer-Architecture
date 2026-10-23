@@ -59,6 +59,7 @@ instructions/15_ROTL/
 make test      # C 測試 + UBSan + 22 項 Python 測試(含模擬器)
 make counts    # 重新量測指令數,寫入 report/figures/
 make encode    # 印出 rotl 的機器碼範例
+make evidence ID=<學號>   # 執行證據:存到 report/figures/run_log_<學號>.txt
 make asm       # 產生編譯器輸出的組合語言 build/rotl_O0.s、build/rotl_O2.s
 make ub-demo   # 反例:未處理 n = 0 的寫法(預期報錯)
 make verify    # 效能驗證(見 experiments/README.md;ARM64 實機量測只在 ARM64 電腦執行)
