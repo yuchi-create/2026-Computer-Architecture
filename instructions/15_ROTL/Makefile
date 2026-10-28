@@ -49,7 +49,7 @@ counts:
 $(BUILD):
 	mkdir -p $(BUILD)
 
-# CP3:印出編碼範例(暫定的 funct3 / funct7 由 spec/rotl_isa.h 讀取)
+# CP3:印出編碼範例(funct3 / funct7 由 spec/rotl_isa.h 讀取)
 encode:
 	$(PYTHON) tools/rotl_isa.py
 
