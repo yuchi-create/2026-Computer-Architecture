@@ -10,13 +10,13 @@
 
 正式語意與測試向量見 [HOMEWORK.md 第六節](../../HOMEWORK.md#六題目語意規格)。
 
-![Claude 吉祥物把 funct7、rs2、rs1、funct3、rd、opcode 六個欄位搬進 32-bit 指令,組出 rotl a0, a1, a2 的機器碼 0x1EC5850B](demo/media/rotl_encode.gif)
+![Claude 吉祥物把 funct7、rs2、rs1、funct3、rd、opcode 六個欄位搬進 32-bit 指令,組出 rotl a0, a1, a2 的機器碼 0x00C5850B](demo/media/rotl_encode.gif)
 
 ```
 rotl rd, rs1, rs2      n = rs2 & 31;  rd = n == 0 ? rs1 : (rs1 << n) | (rs1 >> (32 − n))
 ```
 
-R-type,custom-0(`0001011`)。funct3 / funct7 **待教師分配**,目前為暫定值(見 [`spec/rotl_isa.h`](spec/rotl_isa.h))。
+R-type,custom-0(`0001011`)。funct3 / funct7 依課程公告為 `000` / `0000000`(見 [`spec/rotl_isa.h`](spec/rotl_isa.h))。
 
 > 本目錄的內容與 commit 歷史由 [Underiger/rotl](https://github.com/Underiger/rotl) 搬移而來,原本的檔案依本目錄的範本拆到 `c_baseline/`、`rv32im/`、`spec/`、`tests/`、`references/`。CP1 已於 2026-10-13 在 Underiger/rotl 打 tag [`cp1-submit`](https://github.com/Underiger/rotl/releases/tag/cp1-submit)。
 
