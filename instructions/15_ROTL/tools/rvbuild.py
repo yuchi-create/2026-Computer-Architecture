@@ -5,8 +5,8 @@ import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-C_BASELINE = ROOT / "c_baseline"
-RV32IM = ROOT / "rv32im"
+C_BASELINE = ROOT / "src" / "c_baseline"
+RV32IM = ROOT / "src" / "rv32im"
 SPEC = ROOT / "spec"
 BUILD = ROOT / "build"
 
