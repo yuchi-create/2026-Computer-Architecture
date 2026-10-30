@@ -2,7 +2,7 @@ CC      ?= cc
 CFLAGS  ?= -std=c11 -Wall -Wextra -Werror -O2
 
 BUILD   = build
-VECTORS = ../tests/rotl_vectors.csv
+VECTORS = ../../tests/rotl_vectors.csv
 
 .PHONY: all test test-c test-ubsan ub-demo clean
 

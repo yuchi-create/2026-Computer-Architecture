@@ -1,4 +1,4 @@
-# 15_ROTL/c_baseline/
+# 15_ROTL/src/c_baseline/
 
 - 對應 Checkpoint:CP1
 - 內容:C 參考實作(原始碼、與 spec 一致的參考函式)
@@ -10,9 +10,9 @@
 | `ub_demo.c` | 反例:未處理 `n = 0` 的寫法,在 UBSan 下會報出移位 32 的未定義行為 |
 
 ```bash
-cd instructions/15_ROTL/c_baseline
+cd instructions/15_ROTL/src/c_baseline
 make test       # test_rotl + UBSan
 make ub-demo    # 反例(n = 0 時預期報錯)
 ```
 
-設計與測試結果見 [`report/CP1.md`](../report/CP1.md)。
+設計與測試結果見 [`report/CP1.md`](../../report/CP1.md)。
