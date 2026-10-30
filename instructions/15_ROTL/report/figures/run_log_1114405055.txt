@@ -1,0 +1,113 @@
+# ROTL 執行證據
+學號:1114405055
+執行者(git user.name):yuchi-create
+時間:2026-10-30T15:41:45+08:00
+機器:macOS 27.0.1 · Apple M5 · arm64
+程式版本:git 5c86287
+工具版本:
+  Apple clang version 21.0.0 (clang-2100.3.34.2)
+  riscv64-elf-gcc (GCC) 16.2.0
+  Python 3.14.8
+  GNU Make 3.81
+
+$ make test
+mkdir -p build
+cc -std=c11 -Wall -Wextra -Werror -O2 -o build/test_rotl src/c_baseline/test_rotl.c src/c_baseline/rotl.c
+./build/test_rotl tests/rotl_vectors.csv
+[CSV] tests/rotl_vectors.csv
+  id   rs1        rs2        expected   got        result
+  T01  0x80000001 0x00000001 0x00000003 0x00000003 PASS
+  T02  0x12345678 0x00000000 0x12345678 0x12345678 PASS
+  T03  0x000000FF 0x00000008 0x0000FF00 0x0000FF00 PASS
+  T04  0x12345678 0x0000001F 0x091A2B3C 0x091A2B3C PASS
+  T05  0x12345678 0x00000020 0x12345678 0x12345678 PASS
+  T06  0x12345678 0x00000021 0x2468ACF0 0x2468ACF0 PASS
+  T07  0x12345678 0xFFFFFFFF 0x091A2B3C 0x091A2B3C PASS
+  T08  0x12345678 0xFFFFFFE4 0x23456781 0x23456781 PASS
+  T09  0x00000000 0x0000000D 0x00000000 0x00000000 PASS
+  T10  0xFFFFFFFF 0x00000011 0xFFFFFFFF 0xFFFFFFFF PASS
+  T11  0x80000000 0x00000001 0x00000001 0x00000001 PASS
+  T12  0x00000001 0x0000001F 0x80000000 0x80000000 PASS
+  T13  0x12345678 0x00000010 0x56781234 0x56781234 PASS
+  T14  0x12345678 0x00000004 0x23456781 0x23456781 PASS
+  T15  0xDEADBEEF 0x0000000C 0xDBEEFDEA 0xDBEEFDEA PASS
+  T16  0xA5A5A5A5 0x00000001 0x4B4B4B4B 0x4B4B4B4B PASS
+[CSV]   16 vectors
+[CROSS] 69000 comparisons with bit-by-bit rotation
+[PROP]  2000 random cases x 3 properties
+ALL PASS (0 failures)
+cc -std=c11 -Wall -Wextra -Werror -O2 -fsanitize=undefined -fno-sanitize-recover=all -o build/test_rotl_ubsan \
+		src/c_baseline/test_rotl.c src/c_baseline/rotl.c
+./build/test_rotl_ubsan tests/rotl_vectors.csv > /dev/null && echo "UBSan: no undefined behavior"
+UBSan: no undefined behavior
+python3 -m unittest discover -s tools -p "test_*.py" -v
+test_assembler_matches_python_encoder (test_rotl_isa.TestAssemblerEncoding.test_assembler_matches_python_encoder)
+組譯器對 rotl 巨集產生的機器碼,必須與 Python 編碼器一致。 ... ok
+test_fields (test_rotl_isa.TestEncoding.test_fields) ... ok
+test_register_range (test_rotl_isa.TestEncoding.test_register_range) ... ok
+test_rejects_other_instructions (test_rotl_isa.TestEncoding.test_rejects_other_instructions) ... ok
+test_roundtrip (test_rotl_isa.TestEncoding.test_roundtrip) ... ok
+test_csv_vectors (test_rotl_isa.TestGolden.test_csv_vectors) ... ok
+test_homework_vectors (test_rotl_isa.TestGolden.test_homework_vectors)
+HOMEWORK.md 6.4 給的三組測資。 ... ok
+test_matches_bitloop (test_rotl_isa.TestGolden.test_matches_bitloop) ... ok
+test_only_low_five_bits_of_rs2 (test_rotl_isa.TestGolden.test_only_low_five_bits_of_rs2) ... ok
+test_chacha_block_rfc8439_2_3_2 (test_rotl_isa.TestKernelGolden.test_chacha_block_rfc8439_2_3_2) ... ok
+test_chacha_quarter_round_rfc8439_2_1_1 (test_rotl_isa.TestKernelGolden.test_chacha_quarter_round_rfc8439_2_1_1) ... ok
+test_rc5_paper_vector (test_rotl_isa.TestKernelGolden.test_rc5_paper_vector) ... ok
+test_baseline_correct_and_has_no_custom_instruction (test_rv32.TestKernels.test_baseline_correct_and_has_no_custom_instruction) ... ok
+test_custom_correct_and_rotation_counts (test_rv32.TestKernels.test_custom_correct_and_rotation_counts) ... ok
+test_custom_never_slower_in_instruction_count (test_rv32.TestKernels.test_custom_never_slower_in_instruction_count) ... ok
+test_branch_version (test_rv32.TestRotlFunctions.test_branch_version) ... ok
+test_branchless_version (test_rv32.TestRotlFunctions.test_branchless_version) ... ok
+test_c_reference (test_rv32.TestRotlFunctions.test_c_reference) ... ok
+test_custom_instruction (test_rv32.TestRotlFunctions.test_custom_instruction) ... ok
+test_dynamic_counts (test_rv32.TestRotlFunctions.test_dynamic_counts)
+含 ret 的每次呼叫指令數:A 版 n=0 為 3、否則 8;B 版固定 5;自訂指令固定 2。 ... ok
+test_division_edge_cases (test_rv32.TestSimulatorAlu.test_division_edge_cases) ... ok
+test_shift_uses_low_five_bits (test_rv32.TestSimulatorAlu.test_shift_uses_low_five_bits) ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 0.758s
+
+OK
+[結束碼 0]
+
+$ make counts
+python3 tools/measure.py
+<!-- 由 tools/measure.py 產生,請勿手動修改。riscv64-elf-gcc (GCC) 16.2.0;編碼 funct3=0b000、funct7=0b0000000 -->
+
+## 表 1:單一 ROTL 運算(呼叫一次函式)
+
+| 版本 | 函式 | 靜態指令數 | 靜態分支數 | 動態指令數(n = 0) | 動態指令數(n ≠ 0) | 16 組測資動態總數 | 動態分支數(taken) |
+|---|---|---:|---:|---:|---:|---:|---:|
+| C 參考實作(GCC -O2) | `rotl_ref` | 6 | 0 | 6 | 6 | 96 | 0(0) |
+| 手寫 A:逐字翻譯(含分支) | `rotl_branch` | 8 | 1 | 3 | 8 | 118 | 16(2) |
+| 手寫 B:無分支 | `rotl_branchless` | 5 | 0 | 5 | 5 | 80 | 0(0) |
+| 自訂指令 rotl | `rotl_custom` | 2 | 0 | 2 | 2 | 32 | 0(0) |
+
+指令數皆包含 `ret`,不含呼叫端的 `call`。
+
+## 表 2:密碼學核心(GCC -O2,各執行一次)
+
+| 核心 | 旋轉次數 | 靜態 RV32IM | 靜態 ROTL | 動態 RV32IM | 動態 ROTL | 動態減少 | IC 比(RV32IM / ROTL) | 每次旋轉省下 | 動態分支數 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| ChaCha20 區塊(常數旋轉) | 320 | 236 | 177 | 1919 | 1284 | 33.1% | 1.49x | 1.98 | 42 / 42 |
+| RC5 金鑰排程(常數 + 變數旋轉) | 156 | 62 | 57 | 2467 | 2000 | 18.9% | 1.23x | 2.99 | 103 / 103 |
+| RC5 加密一個區塊(變數旋轉) | 24 | 29 | 21 | 227 | 131 | 42.3% | 1.73x | 4.00 | 12 / 12 |
+
+## 表 3:動態指令組成(移位相關指令)
+
+| 核心 | 版本 | `sll` | `srl` | `slli` | `srli` | `or` | `andi` | `sub` | `rotl` | 其他 | 合計 |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| chacha20_block | RV32IM | 0 | 0 | 320 | 320 | 0 | 0 | 0 | 0 | 1279 | 1919 |
+| chacha20_block | ROTL | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 320 | 964 | 1284 |
+| rc5_setup | RV32IM | 78 | 78 | 234 | 78 | 78 | 156 | 156 | 0 | 1609 | 2467 |
+| rc5_setup | ROTL | 0 | 0 | 156 | 0 | 0 | 78 | 78 | 156 | 1532 | 2000 |
+| rc5_encrypt | RV32IM | 24 | 24 | 0 | 0 | 24 | 24 | 24 | 0 | 107 | 227 |
+| rc5_encrypt | ROTL | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 24 | 107 | 131 |
+
+`neg` 是 `sub rd, zero, rs` 的虛擬指令,計入 `sub`;`li` 小常數是 `addi`,計入其他。
+
+written: /Users/harry/yuchi-ca/2026-Computer-Architecture/instructions/15_ROTL/report/figures/instruction_counts.md
+[結束碼 0]
