@@ -97,7 +97,7 @@ ChaCha20 的旋轉量固定為 16、12、8、7,不需要計算 `32 − n`,GCC �
 
 `li`、`neg`、`beqz`、`ret` 是組合語言的**偽指令**,組譯後各對應 1 條真實指令(`addi`、`sub`、`beq`、`jalr`)。表中的指令數是模擬器實際執行的機器指令,所以已經是展開後的數字。
 
-執行證據:每位組員在自己的電腦上執行 `make evidence ID=<學號>`,完整輸出存在 `report/figures/run_log_<學號>.txt`。
+執行證據:由組員執行 `make evidence ID=<學號>`,完整輸出存在 `report/figures/run_log_<學號>.txt`。
 
 ## 3. 結果與分析
 
