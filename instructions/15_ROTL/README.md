@@ -18,7 +18,7 @@ rotl rd, rs1, rs2      n = rs2 & 31;  rd = n == 0 ? rs1 : (rs1 << n) | (rs1 >> (
 
 R-type,custom-0(`0001011`)。funct3 / funct7 依課程公告為 `000` / `0000000`(見 [`spec/rotl_isa.h`](spec/rotl_isa.h))。
 
-> 本目錄的內容與 commit 歷史由 [Underiger/rotl](https://github.com/Underiger/rotl) 搬移而來,原本的檔案依本目錄的範本拆到 `c_baseline/`、`rv32im/`、`spec/`、`tests/`、`references/`。CP1 已於 2026-10-13 在 Underiger/rotl 打 tag [`cp1-submit`](https://github.com/Underiger/rotl/releases/tag/cp1-submit)。
+> 本目錄的內容與 commit 歷史由 [Underiger/rotl](https://github.com/Underiger/rotl) 搬移而來,原本的檔案依本目錄的範本拆到 `src/c_baseline/`、`src/rv32im/`、`spec/`、`tests/`、`references/`。CP1 已於 2026-10-13 在 Underiger/rotl 打 tag [`cp1-submit`](https://github.com/Underiger/rotl/releases/tag/cp1-submit)。
 
 ## 小組資訊
 
@@ -36,9 +36,9 @@ instructions/15_ROTL/
 ├── README.md                 本檔
 ├── CONTRIBUTIONS.md          個人貢獻聲明
 ├── Makefile                  在本目錄執行 make test 等指令
-├── c_baseline/               CP1:C 參考實作與測試
+├── src/c_baseline/           CP1:C 參考實作與測試
 ├── tests/                    16 組測資 CSV
-├── rv32im/                   CP2–CP3:RV32IM 組合語言、密碼學核心
+├── src/rv32im/               CP2–CP3:RV32IM 組合語言、密碼學核心
 ├── spec/                     CP3:語意規格、編碼;rotl_isa.h 是編碼常數的唯一設定來源
 ├── references/               參考資料
 ├── tools/                    黃金模型、RV32IM 模擬器、量測腳本、Python 測試

@@ -13,6 +13,6 @@
 
 同一份 CSV 由三處讀取:
 
-- `c_baseline/test_rotl.c`(主機 C 測試)
+- `src/c_baseline/test_rotl.c`(主機 C 測試)
 - `tools/test_rotl_isa.py`(黃金模型測試)
 - `tools/test_rv32.py`、`tools/measure.py`(在 RV32 模擬器上執行)
