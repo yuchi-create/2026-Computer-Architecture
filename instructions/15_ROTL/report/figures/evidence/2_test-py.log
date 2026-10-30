@@ -1,0 +1,31 @@
+python3 -m unittest discover -s tools -p "test_*.py" -v
+test_assembler_matches_python_encoder (test_rotl_isa.TestAssemblerEncoding.test_assembler_matches_python_encoder)
+組譯器對 rotl 巨集產生的機器碼,必須與 Python 編碼器一致。 ... ok
+test_fields (test_rotl_isa.TestEncoding.test_fields) ... ok
+test_register_range (test_rotl_isa.TestEncoding.test_register_range) ... ok
+test_rejects_other_instructions (test_rotl_isa.TestEncoding.test_rejects_other_instructions) ... ok
+test_roundtrip (test_rotl_isa.TestEncoding.test_roundtrip) ... ok
+test_csv_vectors (test_rotl_isa.TestGolden.test_csv_vectors) ... ok
+test_homework_vectors (test_rotl_isa.TestGolden.test_homework_vectors)
+HOMEWORK.md 6.4 給的三組測資。 ... ok
+test_matches_bitloop (test_rotl_isa.TestGolden.test_matches_bitloop) ... ok
+test_only_low_five_bits_of_rs2 (test_rotl_isa.TestGolden.test_only_low_five_bits_of_rs2) ... ok
+test_chacha_block_rfc8439_2_3_2 (test_rotl_isa.TestKernelGolden.test_chacha_block_rfc8439_2_3_2) ... ok
+test_chacha_quarter_round_rfc8439_2_1_1 (test_rotl_isa.TestKernelGolden.test_chacha_quarter_round_rfc8439_2_1_1) ... ok
+test_rc5_paper_vector (test_rotl_isa.TestKernelGolden.test_rc5_paper_vector) ... ok
+test_baseline_correct_and_has_no_custom_instruction (test_rv32.TestKernels.test_baseline_correct_and_has_no_custom_instruction) ... ok
+test_custom_correct_and_rotation_counts (test_rv32.TestKernels.test_custom_correct_and_rotation_counts) ... ok
+test_custom_never_slower_in_instruction_count (test_rv32.TestKernels.test_custom_never_slower_in_instruction_count) ... ok
+test_branch_version (test_rv32.TestRotlFunctions.test_branch_version) ... ok
+test_branchless_version (test_rv32.TestRotlFunctions.test_branchless_version) ... ok
+test_c_reference (test_rv32.TestRotlFunctions.test_c_reference) ... ok
+test_custom_instruction (test_rv32.TestRotlFunctions.test_custom_instruction) ... ok
+test_dynamic_counts (test_rv32.TestRotlFunctions.test_dynamic_counts)
+含 ret 的每次呼叫指令數:A 版 n=0 為 3、否則 8;B 版固定 5;自訂指令固定 2。 ... ok
+test_division_edge_cases (test_rv32.TestSimulatorAlu.test_division_edge_cases) ... ok
+test_shift_uses_low_five_bits (test_rv32.TestSimulatorAlu.test_shift_uses_low_five_bits) ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 0.537s
+
+OK

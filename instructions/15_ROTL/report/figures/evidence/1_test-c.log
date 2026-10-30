@@ -1,0 +1,29 @@
+mkdir -p build
+cc -std=c11 -Wall -Wextra -Werror -O2 -o build/test_rotl src/c_baseline/test_rotl.c src/c_baseline/rotl.c
+./build/test_rotl tests/rotl_vectors.csv
+[CSV] tests/rotl_vectors.csv
+  id   rs1        rs2        expected   got        result
+  T01  0x80000001 0x00000001 0x00000003 0x00000003 PASS
+  T02  0x12345678 0x00000000 0x12345678 0x12345678 PASS
+  T03  0x000000FF 0x00000008 0x0000FF00 0x0000FF00 PASS
+  T04  0x12345678 0x0000001F 0x091A2B3C 0x091A2B3C PASS
+  T05  0x12345678 0x00000020 0x12345678 0x12345678 PASS
+  T06  0x12345678 0x00000021 0x2468ACF0 0x2468ACF0 PASS
+  T07  0x12345678 0xFFFFFFFF 0x091A2B3C 0x091A2B3C PASS
+  T08  0x12345678 0xFFFFFFE4 0x23456781 0x23456781 PASS
+  T09  0x00000000 0x0000000D 0x00000000 0x00000000 PASS
+  T10  0xFFFFFFFF 0x00000011 0xFFFFFFFF 0xFFFFFFFF PASS
+  T11  0x80000000 0x00000001 0x00000001 0x00000001 PASS
+  T12  0x00000001 0x0000001F 0x80000000 0x80000000 PASS
+  T13  0x12345678 0x00000010 0x56781234 0x56781234 PASS
+  T14  0x12345678 0x00000004 0x23456781 0x23456781 PASS
+  T15  0xDEADBEEF 0x0000000C 0xDBEEFDEA 0xDBEEFDEA PASS
+  T16  0xA5A5A5A5 0x00000001 0x4B4B4B4B 0x4B4B4B4B PASS
+[CSV]   16 vectors
+[CROSS] 69000 comparisons with bit-by-bit rotation
+[PROP]  2000 random cases x 3 properties
+ALL PASS (0 failures)
+cc -std=c11 -Wall -Wextra -Werror -O2 -fsanitize=undefined -fno-sanitize-recover=all -o build/test_rotl_ubsan \
+		src/c_baseline/test_rotl.c src/c_baseline/rotl.c
+./build/test_rotl_ubsan tests/rotl_vectors.csv > /dev/null && echo "UBSan: no undefined behavior"
+UBSan: no undefined behavior
