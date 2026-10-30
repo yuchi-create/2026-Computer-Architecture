@@ -85,7 +85,7 @@ funct3 / funct7 只寫在 [`spec/rotl_isa.h`](../spec/rotl_isa.h);若之後再�
 
 機器碼:`0000000 01011 01010 000 01010 0001011` = **`0x00B5050B`**
 
-這正是 [`rv32im/rotl.S`](../rv32im/rotl.S) 中 `rotl_custom` 經組譯後,在 `riscv64-elf-objdump` 看到的指令字:
+這正是 [`src/rv32im/rotl.S`](../src/rv32im/rotl.S) 中 `rotl_custom` 經組譯後,在 `riscv64-elf-objdump` 看到的指令字:
 
 ```
 84:  00b5050b   .insn  4, 0x00b5050b
@@ -126,18 +126,20 @@ RISC-V 已批准的 Zbb 擴充有語意相同的 `rol rd, rs1, rs2`。用 `-marc
 - **同時列出動態與靜態指令數**;以動態為主
 - 編譯器:`riscv64-elf-gcc (GCC) 16.2.0`,`-march=rv32im -mabi=ilp32 -O2`
 - 模擬器:本組的 Python RV32IM 指令集模擬器 [`tools/rv32sim.py`](../tools/rv32sim.py)(Python 3.14.8),只計算指令數,不計 cycle
-- 兩個版本的 C 原始碼完全相同,只差 `rotl32()` 用移位寫法或 `rotl_insn()`(見 [`rv32im/kernels.c`](../rv32im/kernels.c))
+- 兩個版本的 C 原始碼完全相同,只差 `rotl32()` 用移位寫法或 `rotl_insn()`(見 [`src/rv32im/kernels.c`](../src/rv32im/kernels.c))
 - 每次量測都與 RFC 8439、RC5 論文的公開答案比對;結果不一致時量測腳本會中止
 - 依規定,本次**不比較 cycle 數**
 
 ### 3.2 單一旋轉
 
-| 寫法 | 指令數(不含 call / ret) |
-|---|---:|
-| RV32IM,GCC `-O2`,變數旋轉 | 5 |
-| RV32IM,手寫無分支,變數旋轉 | 4 |
-| RV32IM,常數旋轉 | 3 |
-| **ROTL** | **1** |
+| 寫法 | 旋轉本身的指令數(不含 `ret`) | 整個函式(含 `ret`,即 CP2 表 1) |
+|---|---:|---:|
+| RV32IM,GCC `-O2`,變數旋轉(`rotl_ref`) | 5 | 6 |
+| RV32IM,手寫無分支,變數旋轉(CP2 版本 B) | 4 | 5 |
+| RV32IM,常數旋轉 | 3 | — |
+| **ROTL**(`rotl_custom`) | **1** | **2** |
+
+CP2 的「版本 B 固定 5 條」是含 `ret` 的函式指令數;本表左欄只算旋轉本身,所以少 1 條。兩者是同一份量測。
 
 ### 3.3 實際程式:指令數比較表
 

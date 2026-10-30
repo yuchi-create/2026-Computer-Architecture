@@ -668,8 +668,8 @@ class FolderScene(Scene):
 
     FOLDER_X, PET_X = 150, 290
     ROWS = [
-        ("c_baseline/", "C 語言版本(標準答案)", None),
-        ("rv32im/", "沒有新指令時的組合語言寫法", None),
+        ("src/c_baseline/", "C 語言版本(標準答案)", None),
+        ("src/rv32im/", "沒有新指令時的組合語言寫法", None),
         ("spec/", "新指令的規格書", None),
         ("  └ rotl_isa.h", "指令編號只寫在這一個檔案", "encode"),
         ("experiments/", "驗證是不是真的變快", None),

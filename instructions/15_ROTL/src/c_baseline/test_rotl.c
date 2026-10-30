@@ -1,7 +1,7 @@
 /*
  * CP1 測試程式:在主機上驗證 rotl_ref。
  *
- *   ./test_rotl ../tests/rotl_vectors.csv
+ *   ./test_rotl ../../tests/rotl_vectors.csv
  *
  * 1. CSV 測資:逐筆比對預期輸出
  * 2. 交叉驗證:與「每次旋 1 位、重複 n 次」的獨立寫法比對
@@ -77,7 +77,7 @@ static int run_csv(const char *path)
 
 int main(int argc, char **argv)
 {
-    const char *csv = argc > 1 ? argv[1] : "../tests/rotl_vectors.csv";
+    const char *csv = argc > 1 ? argv[1] : "../../tests/rotl_vectors.csv";
 
     int n = run_csv(csv);
     if (n < 0)

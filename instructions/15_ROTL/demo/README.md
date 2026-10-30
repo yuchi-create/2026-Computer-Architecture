@@ -52,7 +52,7 @@ make test
 
 桌寵每秒用 `ps` 檢查一次行程,看到 `make test`、`test_rotl`、`unittest discover` 等指令,就用行程的 tty 找出是哪一個 Terminal 分頁在跑、走過去爬上那個視窗,一邊讀分頁的輸出一邊打勾,全部通過後頭頂跳出 All Passed!。iTerm2 改看最前面的視窗;其他終端機讀不到輸出,吉祥物只會在地上等。
 
-注意:`tools/rv32sim.py` 只是模擬器模組,沒有主程式,直接執行 `python3 tools/rv32sim.py` 不會跑任何測試。69,000 次交叉比對是 `make test` 裡的 C 測試(`c_baseline/test_rotl.c`),模擬器的 22 項測試在 `make test-py`。現場請打 `make test`,兩者都會跑到。
+注意:`tools/rv32sim.py` 只是模擬器模組,沒有主程式,直接執行 `python3 tools/rv32sim.py` 不會跑任何測試。69,000 次交叉比對是 `make test` 裡的 C 測試(`src/c_baseline/test_rotl.c`),模擬器的 22 項測試在 `make test-py`。現場請打 `make test`,兩者都會跑到。
 
 ## 影片(README 與簡報用)
 
